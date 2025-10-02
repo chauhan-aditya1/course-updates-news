@@ -1,11 +1,8 @@
 name: Certification Monitor
 
 on:
-  # Schedule to run every Monday at 9 AM UTC
   schedule:
-    - cron: '0 9 * * 1'
-  
-  # Allow manual trigger
+    - cron: '0 9 * * 1'  # Every Monday 9 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -13,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout code
+      - name: 📥 Checkout
         uses: actions/checkout@v4
       
-      - name: 🐍 Set up Python
+      - name: 🐍 Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
@@ -27,19 +24,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: 🔍 Run certification monitor
+      - name: 🔍 Run monitor
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          python main.py
+        run: python main.py
       
-      - name: 📊 Upload logs (if any)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: monitor-logs
-          path: |
-            *.log
-          retention-days: 30
-          if-no-files-found: ignore
+      - name: 💾 Save snapshots
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data/cert_snapshots.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update snapshots [skip ci]"
+          git push
