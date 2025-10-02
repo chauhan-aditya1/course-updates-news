@@ -1,120 +1,101 @@
 import logging
-from datetime import datetime
-from monitors.rss_monitor import RSSMonitor
-from monitors.webpage_monitor import WebPageMonitor
-from utils.notifier import Notifier
 import yaml
+import json
+import os
+from datetime import datetime
+from monitors.page_change_detector import PageChangeDetector
+from utils.notifier import Notifier
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
 class CertificationMonitor:
     def __init__(self):
         self.load_config()
+        self.detector = PageChangeDetector(self.settings)
         self.notifier = Notifier(self.settings['notification'])
-        self.rss_monitor = RSSMonitor(self.settings)
-        self.webpage_monitor = WebPageMonitor(self.settings)
+        self.snapshot_file = self.settings.get('storage', {}).get('path', 'data/cert_snapshots.json')
     
     def load_config(self):
-        with open('config/sources.yaml', 'r') as f:
-            self.sources = yaml.safe_load(f)
+        with open('config/certifications.yaml', 'r') as f:
+            config = yaml.safe_load(f)
+            self.certifications = config['certifications']
+        
         with open('config/settings.yaml', 'r') as f:
             self.settings = yaml.safe_load(f)
     
-    def scan_all_sources(self):
-        """Scan all configured sources for updates"""
-        logger.info("=" * 60)
-        logger.info("🚀 Starting Certification Update Scan")
-        logger.info(f"⏰ Scan time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}")
-        logger.info("=" * 60)
-        
-        all_updates = []
-        
-        # 1. Monitor RSS Feeds
-        logger.info("\n📡 Checking RSS feeds...")
-        try:
-            rss_updates = self.rss_monitor.check_feeds(
-                self.sources.get('rss_feeds', {})
-            )
-            all_updates.extend(rss_updates)
-            logger.info(f"   Found {len(rss_updates)} updates from RSS feeds")
-        except Exception as e:
-            logger.error(f"❌ Error checking RSS feeds: {e}")
-        
-        # 2. Monitor Announcement Pages
-        logger.info("\n🌐 Checking announcement pages...")
-        try:
-            page_updates = self.webpage_monitor.check_pages(
-                self.sources.get('announcement_pages', {})
-            )
-            all_updates.extend(page_updates)
-            logger.info(f"   Found {len(page_updates)} updates from web pages")
-        except Exception as e:
-            logger.error(f"❌ Error checking announcement pages: {e}")
-        
-        # 3. Filter and deduplicate
-        logger.info("\n🔍 Filtering and deduplicating...")
-        filtered_updates = self.filter_updates(all_updates)
-        
-        # 4. Send notifications
-        logger.info("\n" + "=" * 60)
-        if filtered_updates:
-            logger.info(f"✅ Found {len(filtered_updates)} relevant certification updates!")
-            logger.info("📧 Sending notifications...")
-            self.notifier.send_notification(filtered_updates)
-            
-            # Log update titles
-            logger.info("\n📋 Updates found:")
-            for i, update in enumerate(filtered_updates, 1):
-                logger.info(f"   {i}. [{update['provider'].upper()}] {update['title'][:80]}")
-        else:
-            logger.info("✅ Scan complete - No new certification updates found")
-            logger.info("   This is normal if there haven't been recent announcements")
-        
-        logger.info("=" * 60)
-        return filtered_updates
+    def load_snapshots(self):
+        """Load previous snapshots"""
+        if os.path.exists(self.snapshot_file):
+            try:
+                with open(self.snapshot_file, 'r') as f:
+                    return json.load(f)
+            except Exception as e:
+                logger.warning(f"Could not load snapshots: {e}")
+        return {}
     
-    def filter_updates(self, updates):
-        """Filter and deduplicate updates"""
-        if not updates:
-            return []
+    def save_snapshots(self, snapshots):
+        """Save snapshots"""
+        os.makedirs(os.path.dirname(self.snapshot_file), exist_ok=True)
+        with open(self.snapshot_file, 'w') as f:
+            json.dump(snapshots, f, indent=2)
+    
+    def scan_all_certifications(self):
+        """Scan all certifications for changes"""
+        logger.info("=" * 70)
+        logger.info("🔍 KodeKloud Certification Monitor")
+        logger.info(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}")
+        logger.info(f"📋 Monitoring {len(self.certifications)} certifications")
+        logger.info("=" * 70)
         
-        # Remove duplicates based on URL
-        seen_urls = set()
-        unique_updates = []
+        previous_snapshots = self.load_snapshots()
+        new_snapshots = {}
+        changes_detected = []
         
-        for update in updates:
-            url = update.get('url', '')
-            title = update.get('title', '')
-            key = f"{url}:{title}"
+        for cert_id, cert_config in self.certifications.items():
+            previous = previous_snapshots.get(cert_id)
+            result = self.detector.check_certification(cert_id, cert_config, previous)
             
-            if key not in seen_urls:
-                seen_urls.add(key)
-                unique_updates.append(update)
+            if result:
+                new_snapshots[cert_id] = result.get('snapshot')
+                
+                # Only add to changes if not baseline and has actual changes
+                if result.get('changes') and not result.get('is_baseline'):
+                    changes_detected.append(result)
         
-        # Filter by relevance score
-        min_score = self.settings.get('filters', {}).get('min_relevance', 0)
-        if min_score > 0:
-            unique_updates = [
-                u for u in unique_updates 
-                if u.get('relevance_score', 100) >= min_score
-            ]
+        # Save snapshots
+        self.save_snapshots(new_snapshots)
         
-        # Sort by relevance and date
-        unique_updates.sort(
-            key=lambda x: (x.get('relevance_score', 0), x.get('published_date', '')), 
-            reverse=True
-        )
+        # Send notifications
+        logger.info("\n" + "=" * 70)
+        if changes_detected:
+            logger.info(f"✅ Found {len(changes_detected)} certification(s) with changes")
+            
+            # Group by provider for summary
+            by_provider = {}
+            for change in changes_detected:
+                provider = change.get('provider', 'Other')
+                by_provider.setdefault(provider, []).append(change)
+            
+            for provider, items in by_provider.items():
+                logger.info(f"   {provider}: {len(items)} update(s)")
+            
+            self.notifier.send_notification(changes_detected)
+            logger.info("📧 Notification sent")
+        else:
+            logger.info("✅ No changes detected - all certifications stable")
         
-        return unique_updates
+        logger.info("=" * 70)
+        
+        return changes_detected
 
 if __name__ == "__main__":
     try:
         monitor = CertificationMonitor()
-        monitor.scan_all_sources()
+        monitor.scan_all_certifications()
     except Exception as e:
         logger.error(f"❌ Fatal error: {e}", exc_info=True)
         raise
