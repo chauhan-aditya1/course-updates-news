@@ -3,51 +3,28 @@ notification:
     enabled: true
     smtp_server: "smtp.gmail.com"
     smtp_port: 587
-    from_email: "aditya@kodekloud.com"  # ⚠️ CHANGE THIS TO YOUR EMAIL
+    from_email: "aditya@kodekloud.com"
     to_emails:
-      - "aditya@kodekloud.com"  
-      - "gordon@kodekloud.com" 
-      - "shafaq@kodekloud.com" 
-      - "aakash@kodekloud.com" 
-      - "michael@kodekloud.com" 
-      - "mmumshad@kodekloud.com" 
-  slack:
-    enabled: false  # Set to true if you want Slack notifications
-    webhook_url: ""  # Will be set via environment variable
+      - "aditya@kodekloud.com"
+#     - "gordon@kodekloud.com"
+ #     - "shafaq@kodekloud.com"
+  #    - "aakash@kodekloud.com"
+   #   - "michael@kodekloud.com"
+    #  - "mmumshad@kodekloud.com" #
   
-  discord:
+  slack:
     enabled: false
     webhook_url: ""
 
-# How far back to check for updates (in days)
-lookback_days: 7
+# Detection settings
+detection:
+  # Sensitivity for change detection
+  # low = only major changes (versions, retirements)
+  # medium = moderate changes  
+  # high = any content change
+  sensitivity: "medium"
 
-# Filtering
-filters:
-  min_relevance: 70  # Increased from 60 - only high-quality matches  
-  exclude_keywords:
-    # Generic post patterns
-    - "find out about"
-    - "check out our latest"
-    - "new courses and certification"
-    - "training releases in"
-    - "latest training"
-    - "what's new in"
-    - "monthly updates"
-    - "this month"
-    # Non-exam content
-    - "meet"
-    - "interview"
-    - "profile"
-    - "story"
-    - "journey"
-    - "career"
-    - "webinar"
-    - "event"
-    - "promotion"
-    - "discount"
-    - "sale"
-    - "skill builder"
-    - "digital training products"
-    - "aws jam"
-  include_certs: []  # Leave empty to monitor all certs
+# Storage for snapshots
+storage:
+  type: "json"
+  path: "data/cert_snapshots.json"
