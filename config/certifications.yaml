@@ -1,0 +1,285 @@
+# KodeKloud Certification Monitoring - All 49 Certifications
+
+certifications:
+  # AWS (7)
+  aws_cloud_practitioner:
+    name: "AWS Certified Cloud Practitioner"
+    code: "CLF-C02"
+    url: "https://aws.amazon.com/certification/certified-cloud-practitioner/"
+    provider: "AWS"
+  
+  aws_solutions_architect:
+    name: "AWS Solutions Architect Associate"
+    code: "SAA-C03"
+    url: "https://aws.amazon.com/certification/certified-solutions-architect-associate/"
+    provider: "AWS"
+  
+  aws_developer:
+    name: "AWS Developer Associate"
+    code: "DVA-C02"
+    url: "https://aws.amazon.com/certification/certified-developer-associate/"
+    provider: "AWS"
+  
+  aws_sysops:
+    name: "AWS SysOps Administrator"
+    code: "SOA-C02"
+    url: "https://aws.amazon.com/certification/certified-sysops-admin-associate/"
+    provider: "AWS"
+  
+  aws_devops:
+    name: "AWS DevOps Engineer Professional"
+    code: "DOP-C02"
+    url: "https://aws.amazon.com/certification/certified-devops-engineer-professional/"
+    provider: "AWS"
+  
+  aws_ai_practitioner:
+    name: "AWS AI Practitioner"
+    code: "AIF-C01"
+    url: "https://aws.amazon.com/certification/certified-ai-practitioner/"
+    provider: "AWS"
+  
+  aws_ml_associate:
+    name: "AWS Machine Learning Associate"
+    code: "MLA-C01"
+    url: "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/"
+    provider: "AWS"
+
+  # Azure (10)
+  az900:
+    name: "Azure Fundamentals"
+    code: "AZ-900"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-900/"
+    provider: "Azure"
+  
+  az104:
+    name: "Azure Administrator"
+    code: "AZ-104"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-104/"
+    provider: "Azure"
+  
+  az204:
+    name: "Azure Developer"
+    code: "AZ-204"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-204/"
+    provider: "Azure"
+  
+  az305:
+    name: "Azure Solutions Architect"
+    code: "AZ-305"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-305/"
+    provider: "Azure"
+  
+  az400:
+    name: "Azure DevOps Engineer"
+    code: "AZ-400"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-400/"
+    provider: "Azure"
+  
+  az500:
+    name: "Azure Security Engineer"
+    code: "AZ-500"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-500/"
+    provider: "Azure"
+  
+  az700:
+    name: "Azure Network Engineer"
+    code: "AZ-700"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/az-700/"
+    provider: "Azure"
+  
+  dp900:
+    name: "Azure Data Fundamentals"
+    code: "DP-900"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/dp-900/"
+    provider: "Azure"
+  
+  ai900:
+    name: "Azure AI Fundamentals"
+    code: "AI-900"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/ai-900/"
+    provider: "Azure"
+  
+  ai102:
+    name: "Azure AI Engineer"
+    code: "AI-102"
+    url: "https://learn.microsoft.com/en-us/certifications/exams/ai-102/"
+    provider: "Azure"
+
+  # Kubernetes (5)
+  cka:
+    name: "Certified Kubernetes Administrator"
+    code: "CKA"
+    url: "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/"
+    provider: "CNCF"
+  
+  ckad:
+    name: "Certified Kubernetes Application Developer"
+    code: "CKAD"
+    url: "https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/"
+    provider: "CNCF"
+  
+  cks:
+    name: "Certified Kubernetes Security Specialist"
+    code: "CKS"
+    url: "https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/"
+    provider: "CNCF"
+  
+  kcna:
+    name: "Kubernetes Cloud Native Associate"
+    code: "KCNA"
+    url: "https://training.linuxfoundation.org/certification/kubernetes-cloud-native-associate/"
+    provider: "CNCF"
+  
+  kcsa:
+    name: "Kubernetes Cloud Native Security Associate"
+    code: "KCSA"
+    url: "https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/"
+    provider: "CNCF"
+
+  # CNCF Projects (9)
+  pca:
+    name: "Prometheus Certified Associate"
+    code: "PCA"
+    url: "https://training.linuxfoundation.org/certification/prometheus-certified-associate/"
+    provider: "CNCF"
+  
+  ica:
+    name: "Istio Certified Associate"
+    code: "ICA"
+    url: "https://training.linuxfoundation.org/certification/istio-certified-associate-ica/"
+    provider: "CNCF"
+  
+  cca:
+    name: "Cilium Certified Associate"
+    code: "CCA"
+    url: "https://training.linuxfoundation.org/certification/cilium-certified-associate-cca/"
+    provider: "CNCF"
+  
+  cgoa:
+    name: "GitOps Certified Associate"
+    code: "CGOA"
+    url: "https://training.linuxfoundation.org/certification/gitops-associate-cgoa/"
+    provider: "CNCF"
+  
+  capa:
+    name: "Certified Argo Project Associate"
+    code: "CAPA"
+    url: "https://training.linuxfoundation.org/certification/certified-argo-project-associate-capa/"
+    provider: "CNCF"
+  
+  cba:
+    name: "Certified Backstage Associate"
+    code: "CBA"
+    url: "https://training.linuxfoundation.org/certification/certified-backstage-associate-cba/"
+    provider: "CNCF"
+  
+  otca:
+    name: "OpenTelemetry Certified Associate"
+    code: "OTCA"
+    url: "https://training.linuxfoundation.org/certification/opentelemetry-certified-associate-otca/"
+    provider: "CNCF"
+  
+  kca:
+    name: "Kyverno Certified Associate"
+    code: "KCA"
+    url: "https://training.linuxfoundation.org/certification/kyverno-certified-associate-kca/"
+    provider: "CNCF"
+  
+  cnpa:
+    name: "Cloud Native Platform Engineering Associate"
+    code: "CNPA"
+    url: "https://training.linuxfoundation.org/certification/cloud-native-platform-engineering-associate-cnpa/"
+    provider: "CNCF"
+
+  # Google Cloud (1)
+  gcp_cdl:
+    name: "Cloud Digital Leader"
+    code: "CDL"
+    url: "https://cloud.google.com/learn/certification/cloud-digital-leader"
+    provider: "Google Cloud"
+
+  # HashiCorp (4)
+  terraform:
+    name: "Terraform Associate"
+    code: "TA-003"
+    url: "https://www.hashicorp.com/certification/terraform-associate"
+    provider: "HashiCorp"
+  
+  vault_associate:
+    name: "Vault Associate"
+    code: "VA-002"
+    url: "https://www.hashicorp.com/certification/vault-associate"
+    provider: "HashiCorp"
+  
+  vault_ops:
+    name: "Vault Operations Professional"
+    code: "VOP-002"
+    url: "https://www.hashicorp.com/certification/vault-operations-professional"
+    provider: "HashiCorp"
+  
+  consul:
+    name: "Consul Associate"
+    code: "CA-002"
+    url: "https://www.hashicorp.com/certification/consul-associate"
+    provider: "HashiCorp"
+
+  # Others (10)
+  docker_dca:
+    name: "Docker Certified Associate"
+    code: "DCA"
+    url: "https://training.mirantis.com/certification/dca-certification-exam/"
+    provider: "Docker"
+  
+  pcap:
+    name: "Python PCAP Certification"
+    code: "PCAP-31-03"
+    url: "https://pythoninstitute.org/pcap"
+    provider: "Python Institute"
+  
+  security_plus:
+    name: "CompTIA Security+"
+    code: "SY0-701"
+    url: "https://www.comptia.org/certifications/security"
+    provider: "CompTIA"
+  
+  lfcs:
+    name: "Linux Foundation Certified SysAdmin"
+    code: "LFCS"
+    url: "https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/"
+    provider: "Linux Foundation"
+  
+  lpic1:
+    name: "LPIC-1 Linux Administrator"
+    code: "101-500"
+    url: "https://www.lpi.org/our-certifications/lpic-1-overview/"
+    provider: "LPI"
+  
+  finops:
+    name: "FinOps Certified Practitioner"
+    code: "FOCP"
+    url: "https://www.finops.org/certification/"
+    provider: "FinOps Foundation"
+  
+  github_actions:
+    name: "GitHub Actions Certification"
+    code: "GHA"
+    url: "https://examregistration.github.com/overview"
+    provider: "GitHub"
+  
+  github_copilot:
+    name: "GitHub Copilot Certification"
+    code: "GHC"
+    url: "https://examregistration.github.com/overview"
+    provider: "GitHub"
+  
+  jenkins:
+    name: "Certified Jenkins Engineer"
+    code: "CJE"
+    url: "https://www.cloudbees.com/jenkins/certification"
+    provider: "CloudBees"
+  
+  nvidia:
+    name: "NVIDIA Gen AI Certification"
+    code: "NVIDIA-AI"
+    url: "https://www.nvidia.com/en-us/training/"
+    provider: "NVIDIA"
