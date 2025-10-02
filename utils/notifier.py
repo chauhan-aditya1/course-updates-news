@@ -52,15 +52,15 @@ class Notifier:
         except Exception as e:
             logger.error(f"✗ Error sending email: {str(e)}")
     
-    def _create_email_body(self, updates):
-        """Create HTML email body"""
+   def _create_email_body(self, updates):
+        """Create HTML email for certification changes"""
+        from datetime import datetime
+        
         # Group by provider
         by_provider = {}
         for update in updates:
-            provider = update.get('provider', 'Other').upper()
-            if provider not in by_provider:
-                by_provider[provider] = []
-            by_provider[provider].append(update)
+            provider = update.get('provider', 'Other')
+            by_provider.setdefault(provider, []).append(update)
         
         html = """
         <html>
@@ -84,8 +84,15 @@ class Notifier:
                     text-align: center;
                 }
                 .header h1 {
-                    margin: 0;
+                    margin: 0 0 10px 0;
                     font-size: 28px;
+                }
+                .summary {
+                    background-color: #fff3cd;
+                    border-left: 4px solid #ffc107;
+                    padding: 15px;
+                    margin-bottom: 30px;
+                    border-radius: 4px;
                 }
                 .provider-section {
                     margin-bottom: 30px;
@@ -93,48 +100,48 @@ class Notifier:
                 .provider-header {
                     background-color: #667eea;
                     color: white;
-                    padding: 15px;
+                    padding: 12px 20px;
                     border-radius: 8px;
-                    font-size: 20px;
+                    font-size: 18px;
                     font-weight: bold;
                     margin-bottom: 15px;
                 }
-                .update-card {
-                    background-color: white;
+                .cert-card {
+                    background: white;
                     border-left: 4px solid #667eea;
                     border-radius: 8px;
                     padding: 20px;
                     margin-bottom: 15px;
                     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                 }
-                .update-title {
+                .cert-title {
                     font-size: 18px;
                     font-weight: bold;
                     color: #2c3e50;
-                    margin-bottom: 10px;
+                    margin-bottom: 8px;
                 }
-                .update-meta {
-                    font-size: 13px;
-                    color: #7f8c8d;
-                    margin-bottom: 15px;
-                }
-                .update-summary {
-                    color: #555;
-                    margin-bottom: 15px;
-                    line-height: 1.6;
-                }
-                .keywords {
-                    margin-bottom: 15px;
-                }
-                .keyword-tag {
+                .cert-code {
                     display: inline-block;
                     background-color: #e8f5e9;
                     color: #2e7d32;
                     padding: 4px 12px;
                     border-radius: 12px;
-                    font-size: 12px;
-                    margin-right: 8px;
-                    margin-bottom: 8px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 15px;
+                }
+                .change-item {
+                    background-color: #fff9e6;
+                    border-left: 3px solid #ff9800;
+                    padding: 12px 15px;
+                    margin: 8px 0;
+                    border-radius: 4px;
+                    font-size: 15px;
+                }
+                .change-item::before {
+                    content: "▸ ";
+                    color: #ff9800;
+                    font-weight: bold;
                 }
                 .btn {
                     display: inline-block;
@@ -143,30 +150,67 @@ class Notifier:
                     color: white !important;
                     text-decoration: none;
                     border-radius: 5px;
+                    margin-top: 10px;
                     font-weight: 500;
                 }
-                .summary-box {
-                    background-color: #fff3cd;
-                    border-left: 4px solid #ffc107;
-                    padding: 15px;
-                    margin-bottom: 30px;
-                    border-radius: 4px;
+                .btn:hover {
+                    background-color: #5568d3;
+                }
+                .footer {
+                    margin-top: 40px;
+                    padding-top: 20px;
+                    border-top: 2px solid #ddd;
+                    text-align: center;
+                    color: #7f8c8d;
+                    font-size: 13px;
                 }
             </style>
         </head>
         <body>
             <div class="header">
-                <h1>🔔 Certification Updates</h1>
-                <p style="margin: 10px 0 0 0; opacity: 0.9;">
+                <h1>🔔 Certification Updates Detected</h1>
+                <p style="margin: 0; opacity: 0.95; font-size: 16px;">
                     """ + datetime.now().strftime('%B %d, %Y') + """
                 </p>
             </div>
             
-            <div class="summary-box">
-                <strong>📊 Summary:</strong> Found """ + str(len(updates)) + """ updates across """ + str(len(by_provider)) + """ providers
+            <div class="summary">
+                <strong>📊 Summary:</strong> """ + str(len(updates)) + """ certification(s) updated across """ + str(len(by_provider)) + """ provider(s)
             </div>
         """
         
+        for provider, provider_updates in by_provider.items():
+            html += f'<div class="provider-section">'
+            html += f'<div class="provider-header">📚 {provider} ({len(provider_updates)} update{"s" if len(provider_updates) > 1 else ""})</div>'
+            
+            for update in provider_updates:
+                html += '<div class="cert-card">'
+                html += f'<div class="cert-title">{update["name"]}</div>'
+                html += f'<span class="cert-code">{update["code"]}</span>'
+                html += '<div style="margin-top: 15px;"><strong>Changes Detected:</strong></div>'
+                
+                for change in update['changes']:
+                    html += f'<div class="change-item">{change}</div>'
+                
+                html += f'<a href="{update["url"]}" class="btn">View Certification Page →</a>'
+                html += '</div>'
+            
+            html += '</div>'
+        
+        html += """
+            <div class="footer">
+                <p><strong>KodeKloud Certification Monitor</strong></p>
+                <p>Automated monitoring for 49 certifications</p>
+                <p style="margin-top: 10px; font-size: 11px;">
+                    AWS • Azure • Kubernetes • CNCF • Google Cloud • HashiCorp • More
+                </p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        return html
+       
         for provider, provider_updates in by_provider.items():
             html += f'<div class="provider-section">'
             html += f'<div class="provider-header">📚 {provider}</div>'
