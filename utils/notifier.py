@@ -2,7 +2,6 @@ import smtplib
 import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import requests
 import os
 from datetime import datetime
 
@@ -37,13 +36,13 @@ class Notifier:
             body = self._create_email_body(updates)
             msg.attach(MIMEText(body, 'html'))
             
+            password = os.getenv('EMAIL_PASSWORD')
+            if not password:
+                logger.error("EMAIL_PASSWORD environment variable not set")
+                return
+            
             with smtplib.SMTP(email_config['smtp_server'], email_config['smtp_port']) as server:
                 server.starttls()
-                password = os.getenv('EMAIL_PASSWORD')
-                if not password:
-                    logger.error("EMAIL_PASSWORD environment variable not set")
-                    return
-                
                 server.login(email_config['from_email'], password)
                 server.send_message(msg)
             
@@ -52,10 +51,8 @@ class Notifier:
         except Exception as e:
             logger.error(f"✗ Error sending email: {str(e)}")
     
-   def _create_email_body(self, updates):
+    def _create_email_body(self, updates):
         """Create HTML email for certification changes"""
-        from datetime import datetime
-        
         # Group by provider
         by_provider = {}
         for update in updates:
@@ -82,20 +79,30 @@ class Notifier:
                     border-radius: 10px;
                     margin-bottom: 30px;
                     text-align: center;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 }
                 .header h1 {
                     margin: 0 0 10px 0;
                     font-size: 28px;
                 }
+                .header p {
+                    margin: 0;
+                    opacity: 0.95;
+                    font-size: 16px;
+                }
                 .summary {
                     background-color: #fff3cd;
                     border-left: 4px solid #ffc107;
-                    padding: 15px;
+                    padding: 15px 20px;
                     margin-bottom: 30px;
                     border-radius: 4px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                }
+                .summary strong {
+                    color: #856404;
                 }
                 .provider-section {
-                    margin-bottom: 30px;
+                    margin-bottom: 35px;
                 }
                 .provider-header {
                     background-color: #667eea;
@@ -105,6 +112,7 @@ class Notifier:
                     font-size: 18px;
                     font-weight: bold;
                     margin-bottom: 15px;
+                    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
                 }
                 .cert-card {
                     background: white;
@@ -113,6 +121,10 @@ class Notifier:
                     padding: 20px;
                     margin-bottom: 15px;
                     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    transition: box-shadow 0.3s ease;
+                }
+                .cert-card:hover {
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
                 }
                 .cert-title {
                     font-size: 18px;
@@ -130,6 +142,12 @@ class Notifier:
                     font-weight: 600;
                     margin-bottom: 15px;
                 }
+                .changes-header {
+                    font-weight: 600;
+                    color: #555;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                }
                 .change-item {
                     background-color: #fff9e6;
                     border-left: 3px solid #ff9800;
@@ -137,11 +155,13 @@ class Notifier:
                     margin: 8px 0;
                     border-radius: 4px;
                     font-size: 15px;
+                    color: #333;
                 }
                 .change-item::before {
                     content: "▸ ";
                     color: #ff9800;
                     font-weight: bold;
+                    margin-right: 5px;
                 }
                 .btn {
                     display: inline-block;
@@ -150,8 +170,9 @@ class Notifier:
                     color: white !important;
                     text-decoration: none;
                     border-radius: 5px;
-                    margin-top: 10px;
+                    margin-top: 15px;
                     font-weight: 500;
+                    transition: background-color 0.3s ease;
                 }
                 .btn:hover {
                     background-color: #5568d3;
@@ -164,14 +185,24 @@ class Notifier:
                     color: #7f8c8d;
                     font-size: 13px;
                 }
+                .footer p {
+                    margin: 5px 0;
+                }
+                .footer strong {
+                    color: #667eea;
+                }
+                .kk-logo {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #667eea;
+                    margin-bottom: 5px;
+                }
             </style>
         </head>
         <body>
             <div class="header">
                 <h1>🔔 Certification Updates Detected</h1>
-                <p style="margin: 0; opacity: 0.95; font-size: 16px;">
-                    """ + datetime.now().strftime('%B %d, %Y') + """
-                </p>
+                <p>""" + datetime.now().strftime('%B %d, %Y') + """</p>
             </div>
             
             <div class="summary">
@@ -179,77 +210,45 @@ class Notifier:
             </div>
         """
         
+        # Add each provider section
         for provider, provider_updates in by_provider.items():
-            html += f'<div class="provider-section">'
-            html += f'<div class="provider-header">📚 {provider} ({len(provider_updates)} update{"s" if len(provider_updates) > 1 else ""})</div>'
+            update_word = "update" if len(provider_updates) == 1 else "updates"
+            html += f"""
+            <div class="provider-section">
+                <div class="provider-header">📚 {provider} ({len(provider_updates)} {update_word})</div>
+            """
             
             for update in provider_updates:
-                html += '<div class="cert-card">'
-                html += f'<div class="cert-title">{update["name"]}</div>'
-                html += f'<span class="cert-code">{update["code"]}</span>'
-                html += '<div style="margin-top: 15px;"><strong>Changes Detected:</strong></div>'
+                html += f"""
+                <div class="cert-card">
+                    <div class="cert-title">{update['name']}</div>
+                    <span class="cert-code">{update['code']}</span>
+                    
+                    <div class="changes-header">Changes Detected:</div>
+                """
                 
                 for change in update['changes']:
                     html += f'<div class="change-item">{change}</div>'
                 
-                html += f'<a href="{update["url"]}" class="btn">View Certification Page →</a>'
-                html += '</div>'
+                html += f"""
+                    <a href="{update['url']}" class="btn">View Certification Page →</a>
+                </div>
+                """
             
             html += '</div>'
         
+        # Footer
         html += """
             <div class="footer">
-                <p><strong>KodeKloud Certification Monitor</strong></p>
-                <p>Automated monitoring for 49 certifications</p>
+                <div class="kk-logo">KodeKloud</div>
+                <p><strong>Certification Monitor</strong></p>
+                <p>Automated monitoring for 49+ certifications</p>
                 <p style="margin-top: 10px; font-size: 11px;">
-                    AWS • Azure • Kubernetes • CNCF • Google Cloud • HashiCorp • More
+                    AWS • Azure • Kubernetes • CNCF • Google Cloud • HashiCorp • CompTIA • Linux • More
                 </p>
-            </div>
-        </body>
-        </html>
-        """
-        
-        return html
-       
-        for provider, provider_updates in by_provider.items():
-            html += f'<div class="provider-section">'
-            html += f'<div class="provider-header">📚 {provider}</div>'
-            
-            for update in provider_updates:
-                html += '<div class="update-card">'
-                html += f'<div class="update-title">{update.get("title", "No title")}</div>'
-                
-                html += '<div class="update-meta">'
-                html += f'📍 {update.get("source", "Unknown")} | '
-                html += f'📅 {update.get("published_date", "Recent")[:10]} | '
-                html += f'⭐ {update.get("relevance_score", 0)}/100'
-                html += '</div>'
-                
-                if update.get('keywords_matched'):
-                    html += '<div class="keywords">'
-                    for keyword in update['keywords_matched'][:5]:
-                        html += f'<span class="keyword-tag">🏷️ {keyword}</span>'
-                    html += '</div>'
-                
-                summary = update.get('summary', '')
-                if summary:
-                    # Clean and truncate summary
-                    summary = summary.replace('\n', ' ').strip()
-                    if len(summary) > 400:
-                        summary = summary[:400] + '...'
-                    html += f'<div class="update-summary">{summary}</div>'
-                
-                if update.get('url'):
-                    html += f'<a href="{update["url"]}" class="btn">Read Full Article →</a>'
-                
-                html += '</div>'
-            
-            html += '</div>'
-        
-        html += """
-            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #7f8c8d; font-size: 12px;">
-                <p>Automated Certification Monitor</p>
-                <p>AWS | Azure | Kubernetes | Google Cloud | DevOps</p>
+                <p style="margin-top: 15px; font-size: 11px; color: #999;">
+                    This is an automated notification. Changes detected on official certification pages.
+                </p>
             </div>
         </body>
         </html>
@@ -260,6 +259,8 @@ class Notifier:
     def send_slack(self, updates):
         """Send Slack notification"""
         try:
+            import requests
+            
             webhook_url = os.getenv('SLACK_WEBHOOK_URL') or self.config['slack'].get('webhook_url')
             if not webhook_url:
                 logger.warning("Slack webhook URL not configured")
@@ -268,11 +269,10 @@ class Notifier:
             # Group by provider
             by_provider = {}
             for update in updates:
-                provider = update.get('provider', 'Other').upper()
-                if provider not in by_provider:
-                    by_provider[provider] = []
-                by_provider[provider].append(update)
+                provider = update.get('provider', 'Other')
+                by_provider.setdefault(provider, []).append(update)
             
+            # Create message blocks
             blocks = [
                 {
                     "type": "header",
@@ -282,10 +282,18 @@ class Notifier:
                         "emoji": True
                     }
                 },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"*{datetime.now().strftime('%B %d, %Y')}*\nUpdates detected across {len(by_provider)} provider(s)"
+                    }
+                },
                 {"type": "divider"}
             ]
             
-            for provider, provider_updates in list(by_provider.items())[:5]:  # Limit providers
+            # Add updates by provider (limit to avoid message size issues)
+            for provider, provider_updates in list(by_provider.items())[:5]:
                 blocks.append({
                     "type": "section",
                     "text": {
@@ -294,26 +302,38 @@ class Notifier:
                     }
                 })
                 
-                for update in provider_updates[:3]:  # Limit updates per provider
-                    text = f"*{update.get('title', 'No title')[:100]}*\n"
-                    text += f"_{update.get('source', 'Unknown')}_ • Score: {update.get('relevance_score', 0)}/100"
+                for update in provider_updates[:3]:  # Limit to 3 per provider
+                    changes_text = "\n".join([f"• {c}" for c in update['changes'][:3]])
                     
                     block = {
                         "type": "section",
-                        "text": {"type": "mrkdwn", "text": text}
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": f"*{update['name']}* (`{update['code']}`)\n{changes_text}"
+                        }
                     }
                     
                     if update.get('url'):
                         block["accessory"] = {
                             "type": "button",
-                            "text": {"type": "plain_text", "text": "Read"},
+                            "text": {"type": "plain_text", "text": "View"},
                             "url": update['url']
                         }
                     
                     blocks.append(block)
                 
+                if len(provider_updates) > 3:
+                    blocks.append({
+                        "type": "context",
+                        "elements": [{
+                            "type": "mrkdwn",
+                            "text": f"_...and {len(provider_updates) - 3} more {provider} update(s)_"
+                        }]
+                    })
+                
                 blocks.append({"type": "divider"})
             
+            # Send to Slack
             response = requests.post(webhook_url, json={"blocks": blocks})
             response.raise_for_status()
             
