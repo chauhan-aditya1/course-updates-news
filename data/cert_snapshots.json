@@ -20,7 +20,7 @@
       "3"
     ],
     "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
-    "checked_at": "2025-10-27T09:20:35.858235"
+    "checked_at": "2025-11-03T09:20:19.490329"
   },
   "aws_solutions_architect": {
     "content_hash": "ce3f432091d76987fc740bad9b759836",
@@ -43,7 +43,7 @@
       "3"
     ],
     "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
-    "checked_at": "2025-10-27T09:20:35.952428"
+    "checked_at": "2025-11-03T09:20:19.569436"
   },
   "aws_developer": {
     "content_hash": "6d2cb6c2f0c29f08345668fea895db2b",
@@ -66,7 +66,7 @@
       "3"
     ],
     "url": "https://aws.amazon.com/certification/certified-developer-associate/",
-    "checked_at": "2025-10-27T09:20:36.040865"
+    "checked_at": "2025-11-03T09:20:19.655776"
   },
   "aws_sysops": {
     "content_hash": "c6d55cc365555ffaa3be16faeab4d789",
@@ -89,7 +89,7 @@
       "3"
     ],
     "url": "https://aws.amazon.com/certification/certified-sysops-admin-associate/",
-    "checked_at": "2025-10-27T09:20:36.132227"
+    "checked_at": "2025-11-03T09:20:19.737856"
   },
   "aws_devops": {
     "content_hash": "7f98345e9491445f4346053abaafd1a5",
@@ -112,7 +112,7 @@
       "3"
     ],
     "url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
-    "checked_at": "2025-10-27T09:20:36.328605"
+    "checked_at": "2025-11-03T09:20:19.828268"
   },
   "aws_ai_practitioner": {
     "content_hash": "baa5c2cd3741aa3b34e145df66b20fab",
@@ -135,7 +135,7 @@
       "2"
     ],
     "url": "https://aws.amazon.com/certification/certified-ai-practitioner/",
-    "checked_at": "2025-10-27T09:20:36.417050"
+    "checked_at": "2025-11-03T09:20:19.906701"
   },
   "aws_ml_associate": {
     "content_hash": "51e398bfeba20cd4273eb1f74a131b73",
@@ -158,10 +158,10 @@
       "2"
     ],
     "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
-    "checked_at": "2025-10-27T09:20:36.597015"
+    "checked_at": "2025-11-03T09:20:19.985521"
   },
   "az900": {
-    "content_hash": "31445edc7f5dd322a0fa35791c998899",
+    "content_hash": "a0ab9716e6abef6ff136b93618de8617",
     "title": "Microsoft Certified: Azure Fundamentals - Certifications | Microsoft Learn",
     "exam_codes": [
       "AZ-900"
@@ -178,7 +178,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-900/",
-    "checked_at": "2025-10-27T09:20:37.077828"
+    "checked_at": "2025-11-03T09:20:20.835871"
   },
   "az104": {
     "content_hash": "1b5ef50cd7a4651ff958f1da4bdac2fd",
@@ -199,7 +199,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-104/",
-    "checked_at": "2025-10-27T09:20:37.510643"
+    "checked_at": "2025-11-03T09:20:21.116821"
   },
   "az204": {
     "content_hash": "95834cc2c47bb1bf26d9fb1648e6d003",
@@ -220,7 +220,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-204/",
-    "checked_at": "2025-10-27T09:20:37.942554"
+    "checked_at": "2025-11-03T09:20:21.307128"
   },
   "az305": {
     "content_hash": "7372f221985ce4f223ba224b56558fd2",
@@ -240,7 +240,7 @@
       "Exam resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-305/",
-    "checked_at": "2025-10-27T09:20:38.265084"
+    "checked_at": "2025-11-03T09:20:21.521222"
   },
   "az400": {
     "content_hash": "71ef4d17212cbfb26c0140f9e1c40651",
@@ -260,7 +260,7 @@
       "Exam resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-400/",
-    "checked_at": "2025-10-27T09:20:38.538674"
+    "checked_at": "2025-11-03T09:20:21.834868"
   },
   "az500": {
     "content_hash": "383ffa45435d2d0df1b97be540b2bda9",
@@ -281,7 +281,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-500/",
-    "checked_at": "2025-10-27T09:20:38.887035"
+    "checked_at": "2025-11-03T09:20:22.101712"
   },
   "az700": {
     "content_hash": "1c16b9fef711bda6a6d79b2444e3bbae",
@@ -302,10 +302,10 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/az-700/",
-    "checked_at": "2025-10-27T09:20:39.288887"
+    "checked_at": "2025-11-03T09:20:22.473812"
   },
   "dp900": {
-    "content_hash": "ea1ed3c408bafb3f8a97eb5787d80485",
+    "content_hash": "5eb8d67d2d36362f321e12be504681ef",
     "title": "Microsoft Certified: Azure Data Fundamentals - Certifications | Microsoft Learn",
     "exam_codes": [
       "DP-900"
@@ -322,7 +322,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/dp-900/",
-    "checked_at": "2025-10-27T09:20:39.988927"
+    "checked_at": "2025-11-03T09:20:22.648799"
   },
   "ai900": {
     "content_hash": "81c022eec845896ceaf4480e205273cc",
@@ -342,7 +342,7 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/ai-900/",
-    "checked_at": "2025-10-27T09:20:40.406792"
+    "checked_at": "2025-11-03T09:20:22.900280"
   },
   "ai102": {
     "content_hash": "61759c5004f637e1d9e364ff9f106faf",
@@ -363,10 +363,10 @@
       "Certification resources"
     ],
     "url": "https://learn.microsoft.com/en-us/certifications/exams/ai-102/",
-    "checked_at": "2025-10-27T09:20:40.839299"
+    "checked_at": "2025-11-03T09:20:24.247898"
   },
   "cka": {
-    "content_hash": "70bec2507de33a5fc29491c8ef45f8bc",
+    "content_hash": "a605e816524ea555fa8fac3bc14497cc",
     "title": "Certified Kubernetes Administrator (CKA) - Linux Foundation - Education",
     "headings": [
       "Certified Kubernetes Administrator (CKA)",
@@ -374,7 +374,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/",
-    "checked_at": "2025-10-27T09:20:41.127020"
+    "checked_at": "2025-11-03T09:20:24.416695"
   },
   "ckad": {
     "content_hash": "fe495399257221fcdffb318ce3731835",
@@ -385,10 +385,10 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/",
-    "checked_at": "2025-10-27T09:20:41.195326"
+    "checked_at": "2025-11-03T09:20:24.488104"
   },
   "cks": {
-    "content_hash": "b30b4053717e52bafc17c59e849e8c5d",
+    "content_hash": "e80bd23c5e70d7aa3444474834d84dce",
     "title": "Certified Kubernetes Security Specialist (CKS) - Linux Foundation - Education",
     "headings": [
       "Certified Kubernetes Security Specialist (CKS)",
@@ -396,7 +396,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/",
-    "checked_at": "2025-10-27T09:20:41.260964"
+    "checked_at": "2025-11-03T09:20:24.555726"
   },
   "kcna": {
     "content_hash": "c6523b755dd9e8a23c31aa9a55c3a06f",
@@ -407,7 +407,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/kubernetes-cloud-native-associate/",
-    "checked_at": "2025-10-27T09:20:41.348887"
+    "checked_at": "2025-11-03T09:20:24.650278"
   },
   "kcsa": {
     "content_hash": "2117ef89cd113abe4cc7cb48c17470aa",
@@ -418,7 +418,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/kubernetes-and-cloud-native-security-associate-kcsa/",
-    "checked_at": "2025-10-27T09:20:41.402174"
+    "checked_at": "2025-11-03T09:20:24.731387"
   },
   "pca": {
     "content_hash": "46c6f2957f0fa237b6512926d2fa208a",
@@ -429,10 +429,10 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/prometheus-certified-associate/",
-    "checked_at": "2025-10-27T09:20:42.297619"
+    "checked_at": "2025-11-03T09:20:25.899327"
   },
   "ica": {
-    "content_hash": "c7beb7e03f890900b26492ace0998703",
+    "content_hash": "7de2e1a9ed7ddefc15f4b65b6778d248",
     "title": "Istio Certified Associate (ICA) - Linux Foundation - Education",
     "headings": [
       "Istio Certified Associate (ICA)",
@@ -440,7 +440,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/istio-certified-associate-ica/",
-    "checked_at": "2025-10-27T09:20:42.355658"
+    "checked_at": "2025-11-03T09:20:26.752487"
   },
   "cca": {
     "content_hash": "bea915abea7d6bcaa6cbbe07730271aa",
@@ -451,7 +451,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/cilium-certified-associate-cca/",
-    "checked_at": "2025-10-27T09:20:42.415800"
+    "checked_at": "2025-11-03T09:20:26.828259"
   },
   "capa": {
     "content_hash": "ffe6bf87873b00702a7d324766b8b7c9",
@@ -462,7 +462,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/certified-argo-project-associate-capa/",
-    "checked_at": "2025-10-27T09:20:43.476198"
+    "checked_at": "2025-11-03T09:20:27.724217"
   },
   "cba": {
     "content_hash": "b1941f953903fd0f1bf0be0262da20c9",
@@ -473,7 +473,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/certified-backstage-associate-cba/",
-    "checked_at": "2025-10-27T09:20:43.527853"
+    "checked_at": "2025-11-03T09:20:27.799299"
   },
   "otca": {
     "content_hash": "9d5cc3c92fa115d15dd1f9915e7cf16c",
@@ -484,7 +484,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/opentelemetry-certified-associate-otca/",
-    "checked_at": "2025-10-27T09:20:43.578523"
+    "checked_at": "2025-11-03T09:20:27.879033"
   },
   "kca": {
     "content_hash": "c51d8200ea962a83185ff7d40ac53089",
@@ -495,10 +495,10 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/kyverno-certified-associate-kca/",
-    "checked_at": "2025-10-27T09:20:44.450592"
+    "checked_at": "2025-11-03T09:20:27.963658"
   },
   "gcp_cdl": {
-    "content_hash": "8f714a00e5988aeb07215b90f71cc387",
+    "content_hash": "912cce9adac9b0ccfd132a45fb0cf41f",
     "title": "Cloud Digital Leader \u00a0|\u00a0 Learn \u00a0|\u00a0 Google Cloud",
     "headings": [
       "Cloud Digital Leader",
@@ -514,10 +514,10 @@
       "Engage"
     ],
     "url": "https://cloud.google.com/learn/certification/cloud-digital-leader",
-    "checked_at": "2025-10-27T09:20:46.009601"
+    "checked_at": "2025-11-03T09:20:29.728094"
   },
   "docker_dca": {
-    "content_hash": "cb64db3d0a62d7539165315c901ff023",
+    "content_hash": "69e31b113754dcaea24e5429eadecb36",
     "title": "Docker Certification  | Mirantis",
     "headings": [
       "Docker Certification",
@@ -537,10 +537,10 @@
       "Q: What are the exam & equipment requirements for taking the DCA remotely online?"
     ],
     "url": "https://training.mirantis.com/certification/dca-certification-exam/",
-    "checked_at": "2025-10-27T09:20:46.789656"
+    "checked_at": "2025-11-03T09:20:30.663142"
   },
   "pcap": {
-    "content_hash": "12447036e1a8b4ae2c38cfb21f5fcae6",
+    "content_hash": "c8cecfa14111c14273fba155ff6de2ff",
     "title": "PCAP",
     "headings": [
       "PCAP\u2122 \u2013 Certified Associate Python Programmer",
@@ -553,7 +553,7 @@
       "I passed the PCAP exam. What now?"
     ],
     "url": "https://pythoninstitute.org/pcap",
-    "checked_at": "2025-10-27T09:20:47.153945"
+    "checked_at": "2025-11-03T09:20:31.111126"
   },
   "security_plus": {
     "content_hash": "6870ffcd882d1c10f368b1a2fc0446cd",
@@ -571,7 +571,7 @@
       "Advance with confidence"
     ],
     "url": "https://www.comptia.org/certifications/security",
-    "checked_at": "2025-10-27T09:20:48.312431"
+    "checked_at": "2025-11-03T09:20:32.548845"
   },
   "lfcs": {
     "content_hash": "480ec657f2e816b904d8c77cb3f7c582",
@@ -582,7 +582,7 @@
       "Sign up to get access to exclusive promotions, the latest trainings and news"
     ],
     "url": "https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/",
-    "checked_at": "2025-10-27T09:20:48.371237"
+    "checked_at": "2025-11-03T09:20:32.634203"
   },
   "lpic1": {
     "content_hash": "cac03359f8a2b9f91c91cf7425a294dd",
@@ -599,10 +599,10 @@
       "Linux Professional Institute is a non profit organization."
     ],
     "url": "https://www.lpi.org/our-certifications/lpic-1-overview/",
-    "checked_at": "2025-10-27T09:20:48.646338"
+    "checked_at": "2025-11-03T09:20:33.016391"
   },
   "finops": {
-    "content_hash": "f6b59dc542a45c432b9337583bc33378",
+    "content_hash": "c2ac2abaaf58e377dec37e1d4b5273ed",
     "title": "FinOps Certification and Training",
     "headings": [
       "Header Navigation",
@@ -610,21 +610,21 @@
       "Advance your knowledge and career with a range of FinOps training and certification"
     ],
     "url": "https://www.finops.org/certification/",
-    "checked_at": "2025-10-27T09:20:49.584561"
+    "checked_at": "2025-11-03T09:20:33.902225"
   },
   "github_actions": {
     "content_hash": "3d3c68074a01b0a38c5593df71078907",
     "title": "GitHub Learn",
     "headings": [],
     "url": "https://examregistration.github.com/overview",
-    "checked_at": "2025-10-27T09:20:49.799664"
+    "checked_at": "2025-11-03T09:20:34.093482"
   },
   "github_copilot": {
     "content_hash": "3d3c68074a01b0a38c5593df71078907",
     "title": "GitHub Learn",
     "headings": [],
     "url": "https://examregistration.github.com/overview",
-    "checked_at": "2025-10-27T09:20:49.842376"
+    "checked_at": "2025-11-03T09:20:34.116597"
   },
   "jenkins": {
     "content_hash": "546bb91718077d87ec15b7f3ebf461a5",
@@ -647,15 +647,15 @@
       "Audience"
     ],
     "url": "https://www.cloudbees.com/jenkins/certification",
-    "checked_at": "2025-10-27T09:20:50.174723"
+    "checked_at": "2025-11-03T09:20:34.381829"
   },
   "nvidia": {
-    "content_hash": "b1fdfd80dd4ce4622e7254f169b54577",
+    "content_hash": "af36fc4eab602211ff955e894020304e",
     "title": "Deep Learning Institute (DLI) Training and Certification | NVIDIA",
     "headings": [
       "NVIDIA Deep Learning Institute",
       "What\u2019s New in Training from NVIDIA",
-      "Webinar: How to Prepare for Generative AI Certification",
+      "New Agentic AI Professional Certification",
       "Get Certified at GTC Washington, D.C.",
       "Featured Learning Paths",
       "Generative AI and LLM",
@@ -670,6 +670,6 @@
       "Industry-Standard Tools and Frameworks"
     ],
     "url": "https://www.nvidia.com/en-us/training/",
-    "checked_at": "2025-10-27T09:20:50.389967"
+    "checked_at": "2025-11-03T09:20:34.704730"
   }
 }
